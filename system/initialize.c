@@ -219,6 +219,15 @@ static	void	sysinit()
 	prptr->prstklen = NULLSTK;
 	prptr->prstkptr = 0;
 	currpid = NULLPROC;
+#if EJ_Lab1
+	prptr->p_Group = PS1;
+	prptr->p_pi = INT_MAX ;
+	prptr->p_rate = INT_MAX ;
+    prptr->p_T_LastSche = 0 ;
+#endif
+
+
+
 	
 	/* Initialize semaphores */
 
