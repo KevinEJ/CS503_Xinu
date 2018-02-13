@@ -8,8 +8,8 @@
 #									#
 #########################################################################
 
-#COMPILER_ROOT	=	/usr/bin/
-COMPILER_ROOT	=	i386-elf-
+COMPILER_ROOT	=	/usr/bin/
+#COMPILER_ROOT	=	i386-elf-
 PNAME		=	galileo
 PLAT		=	Platform_$(PNAME)
 TOPDIR		=	..
@@ -48,8 +48,8 @@ INCLUDE		=	-I$(TOPDIR)/include
 DEFS		= 	-DBSDURG -DVERSION=\""`cat $(VERSIONFILE)`"\"
 
 # Compiler flags
-#CFLAGS  = -march=i586 -m32 -fno-builtin -fno-stack-protector -nostdlib -c -Wall -O0 ${DEFS} ${INCLUDE} -Werror -Wno-implicit-function-declaration -Wno-pointer-sign
-CFLAGS  = -march=i586 -m32 -fno-builtin -fno-stack-protector -nostdlib -c -Wall -O0 ${DEFS} ${INCLUDE} -Werror -Wno-implicit-function-declaration -Wno-pointer-sign -std=gnu99
+CFLAGS  = -march=i586 -m32 -fno-builtin -fno-stack-protector -nostdlib -c -Wall -O0 ${DEFS} ${INCLUDE} -Werror -Wno-implicit-function-declaration -Wno-pointer-sign
+#CFLAGS  = -march=i586 -m32 -fno-builtin -fno-stack-protector -nostdlib -c -Wall -O0 ${DEFS} ${INCLUDE} -Werror -Wno-implicit-function-declaration -Wno-pointer-sign -std=gnu99
 #CFLAGS  = -march=i586 -m32 -fno-builtin -fno-stack-protector -nostdlib -c -Wall -O0 ${DEFS} ${INCLUDE} -Wno-implicit-function-declaration -Wno-pointer-sign -std=gnu99
 
 ifeq ($(QEMU),1)

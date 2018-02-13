@@ -41,7 +41,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     //////  Global Variable -> PS1_Priority , PS2_Priority 
          
     qid16 curr = firstid( readylist );                                 // First pid in Readylist   ; 
-	while ( queuetab[curr].qnext != queuetail(readylist) ) {     // Search from firstid to lastid 
+	while ( curr != queuetail(readylist) && queuetab[curr].qnext != queuetail(readylist) ) {     // Search from firstid to lastid 
         if( curr == NULLPROC ){ 
             //kprintf ( "Ideally you would not see this message \n" ) ; 
             curr = queuetab[curr].qnext;
@@ -57,8 +57,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
             PS1_Priority ++ ; 
         else if( (&proctab[curr]) -> p_Group == PS2)
             PS2_Priority ++ ; 
-        else 
+        else{ 
             kprintf ( "@@@ ERROR: a process is in neither in PS1 nor PS2 \n" ) ;  
+            kprintf ( "@@@ ERROR: a process [%d] [%s] is in neither in PS1 nor PS2 \n" , curr , proctab[curr].prname ) ;  
+        }
         curr = queuetab[curr].qnext;
 	} 
 

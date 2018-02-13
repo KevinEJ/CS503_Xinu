@@ -222,7 +222,7 @@ static	void	sysinit()
 #if EJ_Lab1
 	prptr->p_Group = PS1;
 	prptr->p_pi = INT_MAX ;
-	prptr->p_rate = INT_MAX ;
+	prptr->p_rate = 0  ;
     prptr->p_T_LastSche = 0 ;
 #endif
 
