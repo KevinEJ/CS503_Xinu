@@ -69,11 +69,23 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     //int current_Group = PS1 ;  
     
     //////  Update Process Priority 
-    uint64 T = getticks () ; T = T >> 16 ;  
+    uint64 T = getticks () ; 
+    //kprintf( " Log: T       = %u    \n" , T ) ; 
+    //kprintf( " Log: T - t      = %u , \n" , T - ptold->p_T_LastSche ) ; 
+    // T = T >> 16 ;  
+    // kprintf( " Log: T >> 16 = %u \n" , T ) ; 
     if( ptold->p_rate == 0 ){
         ptold -> p_pi = INT_MAX ; 
     }else{
-        ptold -> p_pi = ptold -> p_pi +  (int)( ( T - ( ptold -> p_T_LastSche) ) * 100 ) / (int)(ptold -> p_rate)    ; // How to get T-old //T = getticks()  
+        unsigned int temp = (unsigned int)
+                    ( ( T - ( ptold -> p_T_LastSche) ) * 100 ) / (unsigned int)(ptold -> p_rate)    ; 
+        //kprintf( " Log: temp     %u \n", temp ) ;
+        //kprintf( " Log: temp+pi  %u \n", temp + ptold -> p_pi  ) ;
+        if( temp > INT_MAX ) {
+            kprintf( "Overflow happens %ld \n", temp ) ;
+        }
+        ptold -> p_pi = ptold -> p_pi +  (int)( ( T - ( ptold -> p_T_LastSche) ) * 100 ) / (int)(ptold -> p_rate)    ; 
+        // How to get T-old //T = getticks()  
     }
     ptold -> prprio = INT_MAX - ( ptold -> p_pi ) ;  
     
@@ -110,11 +122,13 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     }
     //////   Update Pi = max(Pi, T)  
     ptnew -> p_pi = ( ptnew -> p_pi > T )? ptnew->p_pi : T ;
+    ptnew -> prprio = INT_MAX - ( ptnew -> p_pi ) ;  
     //////   Update t = getticks() ;
     ptnew -> p_T_LastSche = T ; 
     /////    Context Switch 
-    kprintf ( "selected process from group [%d], id [%d],  name = [%s] \n", 
-                                            ptnew->p_Group , currpid,  ptnew->prname ) ;
+    kprintf( " TIMING: T = %u , t = %u , T - t \n" , T , ptnew -> p_T_LastSche ) ; 
+    kprintf ( "selected process from group [%d], id [%d],  name = [%s] , prio = [%d] \n", 
+                                            ptnew->p_Group , currpid,  ptnew->prname , ptnew->prprio) ;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
     ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
             
