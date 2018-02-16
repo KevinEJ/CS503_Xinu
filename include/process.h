@@ -57,9 +57,23 @@ struct procent {		/* Entry in the process table		*/
     int     p_Group      ; // Which Group this process belongs to // 
     pri16     p_pi         ; // Pi                                  //
     pri16     p_rate       ; // rate                                //
-    uint64     p_T_LastSche ; // CPU ticks when the process  was scheduled last time  // 
+    pri16     p_T_LastSche ; // CPU ticks when the process  was scheduled last time  // 
     #endif
 };
+
+//EJ_Lab1 Variables 
+#if EJ_Lab1
+
+#define PS1 0
+#define PS2 1
+int PS1_Priority ; 
+int PS2_Priority ; 
+int PS1_init_Priority  ; 
+int PS2_init_Priority  ; 
+pri16 Clock_ticks ; 
+#endif 
+
+
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/
 #define	STACKMAGIC	0x0A0AAAA9

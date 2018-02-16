@@ -69,21 +69,14 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     //int current_Group = PS1 ;  
     
     //////  Update Process Priority 
-    uint64 T = getticks () ; 
-    //kprintf( " Log: T       = %u    \n" , T ) ; 
-    //kprintf( " Log: T - t      = %u , \n" , T - ptold->p_T_LastSche ) ; 
-    // T = T >> 16 ;  
-    // kprintf( " Log: T >> 16 = %u \n" , T ) ; 
+    //uint64 T = getticks () ; 
+    pri16 T = Clock_ticks ; 
+    //kprintf( " Log: T          = %d , \n"  , T ) ; 
+    //kprintf( " Log: t          = %d , \n"  , ptold->p_T_LastSche ) ; 
+    //kprintf( " Log: T - t      = %d , \n"  , T - ptold->p_T_LastSche ) ; 
     if( ptold->p_rate == 0 ){
         ptold -> p_pi = INT_MAX ; 
     }else{
-        unsigned int temp = (unsigned int)
-                    ( ( T - ( ptold -> p_T_LastSche) ) * 100 ) / (unsigned int)(ptold -> p_rate)    ; 
-        //kprintf( " Log: temp     %u \n", temp ) ;
-        //kprintf( " Log: temp+pi  %u \n", temp + ptold -> p_pi  ) ;
-        if( temp > INT_MAX ) {
-            kprintf( "Overflow happens %ld \n", temp ) ;
-        }
         ptold -> p_pi = ptold -> p_pi +  (int)( ( T - ( ptold -> p_T_LastSche) ) * 100 ) / (int)(ptold -> p_rate)    ; 
         // How to get T-old //T = getticks()  
     }
@@ -126,7 +119,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     //////   Update t = getticks() ;
     ptnew -> p_T_LastSche = T ; 
     /////    Context Switch 
-    kprintf( " TIMING: T = %u , t = %u , T - t \n" , T , ptnew -> p_T_LastSche ) ; 
+    //kprintf( " TIMING: T = %u , t = %u , T - t \n" , T , ptnew -> p_T_LastSche ) ; 
     kprintf ( "selected process from group [%d], id [%d],  name = [%s] , prio = [%d] \n", 
                                             ptnew->p_Group , currpid,  ptnew->prname , ptnew->prprio) ;
 	preempt = QUANTUM;		/* Reset time slice for process	*/

@@ -53,15 +53,8 @@ void	nulluser()
 	/* Initialize the system */
 
 	sysinit();
-    // EJ_Lab1 
-#if EJ_Lab1
-    PS1_init_Priority = 10  ; 
-    PS2_init_Priority = 10  ; 
-    PS1_Priority = PS1_init_Priority  ; 
-    PS2_Priority = PS2_init_Priority  ; 
-#endif
-
-	/* Output Xinu memory layout */
+	
+    /* Output Xinu memory layout */
 	free_mem = 0;
 	for (memptr = memlist.mnext; memptr != NULL;
 						memptr = memptr->mnext) {
@@ -224,6 +217,13 @@ static	void	sysinit()
 	prptr->p_pi = INT_MAX ;
 	prptr->p_rate = 0  ;
     prptr->p_T_LastSche = 0 ;
+    
+    PS1_init_Priority = 10  ; 
+    PS2_init_Priority = 10  ; 
+    PS1_Priority = PS1_init_Priority  ; 
+    PS2_Priority = PS2_init_Priority  ; 
+    Clock_ticks = 0 ; 
+
 #endif
 
 

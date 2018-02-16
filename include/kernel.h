@@ -85,16 +85,4 @@ syscall	kprintf(char *fmt, ...);
 syscall	kputc(byte);
 syscall	kgetc(void);
 
-//EJ_Lab1 Variables 
-#if EJ_Lab1
-
-#define PS1 0
-#define PS2 1
-int PS1_Priority ; 
-int PS2_Priority ; 
-int PS1_init_Priority  ; 
-int PS2_init_Priority  ; 
-
-#endif 
-
 
