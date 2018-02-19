@@ -74,8 +74,10 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     //kprintf( " Log: T          = %d , \n"  , T ) ; 
     //kprintf( " Log: t          = %d , \n"  , ptold->p_T_LastSche ) ; 
     //kprintf( " Log: T - t      = %d , \n"  , T - ptold->p_T_LastSche ) ; 
-    if( ptold->p_rate == 0 ){
-        ptold -> p_pi = INT_MAX ; 
+    if( ptold->p_rate == 0 ){   // For special cases: NULL, STARTUP, MAIN 
+        ptold -> p_pi = INT_MAX ;
+    }else if( ptold -> p_rate == -1 ){
+        ptold -> p_pi = 0 ;
     }else{
         ptold -> p_pi = ptold -> p_pi +  (int)( ( T - ( ptold -> p_T_LastSche) ) * 100 ) / (int)(ptold -> p_rate)    ; 
         // How to get T-old //T = getticks()  

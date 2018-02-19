@@ -50,10 +50,11 @@ pid32	create(
     prptr->p_pi = 0 ; 
     prptr->p_Group = group ; 
     //if( priority < 1 || priority > 100 ){
-    if( priority < 1 ){
-        kprintf("@@ ERROR: Invalid Rate value @@@ \n ") ;
-        return SYSERR ;
-    }
+    //if( priority < 1 ){
+    //    kprintf("@@ ERROR: Invalid Rate value @@@ \n ") ;
+    //    return SYSERR ;
+    //}
+
     prptr->p_rate  = priority ;
 	prptr->prprio = INT_MAX;
     prptr->p_T_LastSche = 0 ;
