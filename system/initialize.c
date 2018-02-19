@@ -88,7 +88,7 @@ void	nulluser()
 
 	// EJ_Lab1 
 #if EJ_Lab1
-    resume(create((void *)startup, INITSTK, PS1 , INITPRIO,
+    resume(create((void *)startup, INITSTK, PS1 , INT_MAX,
 					"Startup process", 0, NULL));
 #else
 	resume(create((void *)startup, INITSTK, INITPRIO,
@@ -139,7 +139,7 @@ local process	startup(void)
 
 	// EJ_Lab1 
 #if EJ_Lab1
-    resume(create((void *)main, INITSTK, PS1 , INITPRIO,
+    resume(create((void *)main, INITSTK, PS1 , INT_MAX,
 					"Main process", 0, NULL));
 #else
 	resume(create((void *)main, INITSTK, INITPRIO,

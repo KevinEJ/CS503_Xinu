@@ -40,8 +40,8 @@ process main() {
         //for (i = 0; i < 2; i++) {
         //    resume(create(sample_proc_cpu, 1024, PS2, 40 + i*10 , "cpu-intense", 0, NULL));
         //}   
-        resume(create(sample_proc_cpu, 1024, PS2, 40   , "  A1 ", 0, NULL));
-        resume(create(sample_proc_cpu, 1024, PS2, 50   , "  A2 ", 0, NULL));
+        resume(create(sample_proc_cpu, 1024, PS1, 50   , "  A1 ", 0, NULL));
+        resume(create(sample_proc_cpu, 1024, PS1, 50   , "  A2 ", 0, NULL));
 //        resume(create(sample_proc_cpu, 1024, PS2, 50   , "  A3 ", 0, NULL));
 //        resume(create(sample_proc_cpu, 1024, PS2, 50   , "  A4 ", 0, NULL));
 //        resume(create(sample_proc_cpu, 1024, PS2, 50   , "  A5 ", 0, NULL));
@@ -53,8 +53,8 @@ process main() {
         }
 	resched_cntl(DEFER_START);
 //        resume(create(sample_proc_cpu_2, 1024, PS2, 30 , "  C1  ", 0, NULL));
-//        resume(create(sample_proc_cpu_2, 1024, PS2, 30 , "  C2  ", 0, NULL));
-//        resume(create(sample_proc_cpu_2, 1024, PS2, 30 , "  C3  ", 0, NULL));
+        resume(create(sample_proc_cpu_2, 1024, PS1, 30 , "  C2  ", 0, NULL));
+        resume(create(sample_proc_cpu_2, 1024, PS1, 30 , "  C3  ", 0, NULL));
 //        resume(create(sample_proc_cpu_2, 1024, PS2, 30 , "  C4  ", 0, NULL));
 //        resume(create(sample_proc_cpu_2, 1024, PS2, 60 , "  C5  ", 0, NULL));
     resched_cntl(DEFER_STOP);

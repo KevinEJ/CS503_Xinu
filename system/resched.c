@@ -82,6 +82,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     }
     ptold -> prprio = INT_MAX - ( ptold -> p_pi ) ;  
     
+    kprintf ( " current process from group [%d], id [%d],  name = [%s] , prio = [%d] \n", 
+                                            ptold->p_Group , currpid,  ptold->prname , ptold->prprio) ;
     ////// Error check //////
     if( ptold -> p_pi < 0 )
         kprintf( " @@@ ERROR : pi less than 0 @@@ \n" ) ;  
