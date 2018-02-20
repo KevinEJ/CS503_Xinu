@@ -47,9 +47,9 @@ pri16	chgprio(
         oldprio             = PS2_init_Priority ; 
         PS2_init_Priority   = newprio ; 
     }else{
-        kprintf( " @@@ ERROR: chgprio : invalid group \n" ) ; 
+        //kprintf( " @@@ ERROR: chgprio : invalid group \n" ) ; 
 		restore(mask);
-        return (pri16) SYSERR ; 
+        //return (pri16) SYSERR ; 
     }
 
 	restore(mask);

@@ -34,7 +34,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     } else if ( ptold -> p_Group == PS2 ){
         PS2_Priority = PS2_init_Priority ; 
     } else{
-        kprintf( " @@@ ERROR: Current Process does not belong to any group @@@ \n" ) ; 
+        //kprintf( " @@@ ERROR: Current Process does not belong to any group @@@ \n" ) ; 
     }
 
     //////  Update Priority 
@@ -48,7 +48,7 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
             continue ; 
         } 
         if( curr == currpid ){
-            kprintf ( "@@@ ERROR: currpid is in ReadyList @@@ \n" ) ; 
+            //kprintf ( "@@@ ERROR: currpid is in ReadyList @@@ \n" ) ; 
             curr = queuetab[curr].qnext;
             continue ; 
         }
@@ -58,8 +58,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
         else if( (&proctab[curr]) -> p_Group == PS2)
             PS2_Priority ++ ; 
         else{ 
-            kprintf ( "@@@ ERROR: a process is in neither in PS1 nor PS2 \n" ) ;  
-            kprintf ( "@@@ ERROR: a process [%d] [%s] is in neither in PS1 nor PS2 \n" , curr , proctab[curr].prname ) ;  
+            //kprintf ( "@@@ ERROR: a process is in neither in PS1 nor PS2 \n" ) ;  
+            //kprintf ( "@@@ ERROR: a process [%d] [%s] is in neither in PS1 nor PS2 \n" , curr , proctab[curr].prname ) ;  
         }
         curr = queuetab[curr].qnext;
 	} 
@@ -76,22 +76,18 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     //kprintf( " Log: T - t      = %d , \n"  , T - ptold->p_T_LastSche ) ; 
     if( ptold->p_rate == 0 ){   // For special cases: NULL, STARTUP, MAIN 
         ptold -> p_pi = INT_MAX ;
-    }else if( ptold -> p_rate == -1 ){
-        ptold -> p_pi = 0 ;
     }else{
         ptold -> p_pi = ptold -> p_pi +  (int)( ( T - ( ptold -> p_T_LastSche) ) * 100 ) / (int)(ptold -> p_rate)    ; 
         // How to get T-old //T = getticks()  
     }
     ptold -> prprio = INT_MAX - ( ptold -> p_pi ) ;  
     
-    kprintf ( " current process from group [%d], id [%d],  name = [%s] , prio = [%d] \n", 
-                                            ptold->p_Group , currpid,  ptold->prname , ptold->prprio) ;
     ////// Error check //////
-    if( ptold -> p_pi < 0 )
+    /*if( ptold -> p_pi < 0 )
         kprintf( " @@@ ERROR : pi less than 0 @@@ \n" ) ;  
     if( ptold -> prprio < 0 )
         kprintf( " @@@ ERROR : prprio less than 0 @@@ \n" ) ;  
-
+    */
 
     //////  Put current process in readylist if it remains eligible 
     if ( ptold->prstate == PR_CURR ){
@@ -124,8 +120,8 @@ void	resched(void)		/* Assumes interrupts are disabled	*/
     ptnew -> p_T_LastSche = T ; 
     /////    Context Switch 
     //kprintf( " TIMING: T = %u , t = %u , T - t \n" , T , ptnew -> p_T_LastSche ) ; 
-    kprintf ( "selected process from group [%d], id [%d],  name = [%s] , prio = [%d] \n", 
-                                            ptnew->p_Group , currpid,  ptnew->prname , ptnew->prprio) ;
+    //kprintf ( "selected process from group [%d], id [%d],  name = [%s] , prio = [%d] \n", 
+    //                                        ptnew->p_Group , currpid,  ptnew->prname , ptnew->prprio) ;
 	preempt = QUANTUM;		/* Reset time slice for process	*/
     ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
             

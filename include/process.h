@@ -54,7 +54,7 @@ struct procent {		/* Entry in the process table		*/
 	int16	prdesc[NDESC];	/* Device descriptors for process	*/
     // EJ_Lab1 
     #if EJ_Lab1
-    int     p_Group      ; // Which Group this process belongs to // 
+    int       p_Group      ; // Which Group this process belongs to // 
     pri16     p_pi         ; // Pi                                  //
     pri16     p_rate       ; // rate                                //
     pri16     p_T_LastSche ; // CPU ticks when the process  was scheduled last time  // 

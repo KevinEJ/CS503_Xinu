@@ -46,7 +46,7 @@ pid32	create(
 
     //EJ_Lab1 
 #if EJ_Lab1
-    kprintf( " EJ: Process [%s] is created \n " , name ) ; 
+    //kprintf( " EJ: Process [%s] is created \n " , name ) ; 
     prptr->p_pi = 0 ; 
     prptr->p_Group = group ; 
     //if( priority < 1 || priority > 100 ){

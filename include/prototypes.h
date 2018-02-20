@@ -27,6 +27,9 @@ extern	status	bufinit(void);
 
 /* in file chprio.c */
 extern	pri16	chprio(pid32, pri16);
+#if EJ_Lab1
+extern	pri16	chgprio( int , pri16);
+#endif
 
 /* in file clkupdate.S */
 extern	uint32	clkcount(void);
